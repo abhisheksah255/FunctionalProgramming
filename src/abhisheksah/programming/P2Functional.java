@@ -18,8 +18,9 @@ public class P2Functional {
 	}
 
 	private static int printAddListFunctional(List<Integer> numbers) {
-		// TODO Auto-generated method stub
-		return numbers.stream().reduce(0,P2Functional::sum);
+//		return numbers.stream().reduce(0,P2Functional::sum);
+//		return numbers.stream().reduce(0,(x,y) -> x+y);
+		return numbers.stream().reduce(0,Integer::sum);
 	}
 
 
