@@ -1,6 +1,8 @@
 package abhisheksah.programming;
 
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class P2Excercise {
 
@@ -8,14 +10,16 @@ public class P2Excercise {
 
 		
 		List<Integer> numbers = List.of(34,56,78,54,53,56,33,67,48,45,21,23,54);
-		List<String> courses = List.of("Spring", "Spring Boot", "API" , "Microservices", "AWS", "PCF","Azure", "Docker", "Kubernetes");
 		int sum=0;
 		
 		System.out.println("Exercise Questions");
+
 		System.out.println("Print Only Odd Numbers from the List");
 		numbers.stream().filter(n ->n%2!=0).forEach(System.out::println);
+		
 		System.out.println("Print the cubes of odd numbers");
 		printCubeOfOddNumberInListFunctional(numbers);
+		
 		System.out.println("Print the square of even numbers");
 		printSquareOfEvenNumberInListFunctional(numbers);
 		
@@ -32,9 +36,21 @@ public class P2Excercise {
 		System.out.println(sum);
 		
 		
-		System.out.println("Print All Courses individually");
+		System.out.println("Create a List with Even Numbers Filtered from the Numbers List");
+		List<Integer>evenNumber=printNewListOfEvenNumber(numbers);
+		System.out.println(evenNumber);
 		
+		System.out.println("Create a List with lengths of all course titles");
+		List<String> courses = List.of("Spring", "Spring Boot", "API" , "Microservices", "AWS", "PCF","Azure", "Docker", "Kubernetes");
+//		List<String>courseLength= courses.stream().sorted(Comparator.comparing(str -> str.length())).collect(Collectors.toList());
+		
+		List<Integer>courseLength= courses.stream().map(str ->str.length()).collect(Collectors.toList());
+		
+		System.out.println(courseLength);
+		
+		System.out.println("Print All Courses individually");
 		courses.stream().forEach(System.out::println);
+
 		System.out.println("Print Courses Containing the word \"Spring\"");
 		courses.stream().filter(n ->n.contains("Spring")).forEach(System.out::println);
 		
@@ -45,6 +61,11 @@ public class P2Excercise {
 		courses.stream().map(c -> c +" "+ c.length()).forEach(System.out::println);
 		
 		System.out.println("*********");
+	}
+
+
+	private static List<Integer> printNewListOfEvenNumber(List<Integer> numbers) {
+		return numbers.stream().filter(x -> x%2==0).collect(Collectors.toList());
 	}
 
 	private static void printCubeOfOddNumberInListFunctional(List<Integer> numbers) {
@@ -69,4 +90,6 @@ public class P2Excercise {
 		return numbers.stream().filter(n ->n%2!=0)
 		.reduce(0,Integer::sum);
 	}
+	
+	
 }
