@@ -52,6 +52,26 @@ public class P3FunctionalInterface {
 		map(squaremapper).
 		forEach(printaction);
 		
+		
+		
+		//Behavior Parameterization 
+		System.out.println("*************");
+
+		filterAndPrint(numbers, x->x%2!=0);
+		System.out.println("*************");
+		filterAndPrint(numbers, x->x%2==0);
+		System.out.println("*************");
+		filterAndPrint(numbers, x->x%3==0);
 	}
+
+	private static void filterAndPrint(List<Integer> numbers, Predicate<? super Integer> oddPredicate) {
+		numbers.stream()
+		.filter(oddPredicate)
+//		.map(x->x*x*x)
+		.forEach(System.out::println);
+	}
+	
+	
+	
 
 }
