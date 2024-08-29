@@ -116,6 +116,147 @@ public class P4CustomClass2 {
 		System.out.println(
 				courses.stream().sorted(compare2values).collect(Collectors.toList())
 				);
+		
+//		[Course [name=FullStack, category=FullStack, reviewScore=91, noOfStudents=14000],
+//		 Course [name=Kubernetes, category=Cloud, reviewScore=91, noOfStudents=20000],
+//		 Course [name=Docker, category=Cloud, reviewScore=92, noOfStudents=20000], 
+//		 Course [name=AWS, category=Cloud, reviewScore=92, noOfStudents=21000],
+//		 Course [name=Spring Boot, category=Framework, reviewScore=95, noOfStudents=18000],
+//		 Course [name=Microservices, category=Microservices, reviewScore=96, noOfStudents=25000],
+//		 Course [name=API, category=Microservices, reviewScore=97, noOfStudents=22000], 
+//		 Course [name=Spring, category=Framework, reviewScore=98, noOfStudents=20000],
+//		 Course [name=Azure, category=Cloud, reviewScore=99, noOfStudents=21000]]
+
+		
+		// using limit ,skip, takewhile,dropwhile
+		System.out.println(
+				courses.stream().sorted(compare2values)
+				.limit(4)
+				.collect(Collectors.toList())
+				);
+//		[Course [name=FullStack, category=FullStack, reviewScore=91, noOfStudents=14000],
+//		Course [name=Kubernetes, category=Cloud, reviewScore=91, noOfStudents=20000],
+//		Course [name=Docker, category=Cloud, reviewScore=92, noOfStudents=20000],
+//		Course [name=AWS, category=Cloud, reviewScore=92, noOfStudents=21000]]
+		
+		System.out.println(
+				courses.stream().sorted(compare2values)
+				.skip(2)
+				.collect(Collectors.toList())
+				);
+//		[Course [name=Docker, category=Cloud, reviewScore=92, noOfStudents=20000], 
+//		 Course [name=AWS, category=Cloud, reviewScore=92, noOfStudents=21000],
+//		 Course [name=Spring Boot, category=Framework, reviewScore=95, noOfStudents=18000],
+//		 Course [name=Microservices, category=Microservices, reviewScore=96, noOfStudents=25000],
+//		 Course [name=API, category=Microservices, reviewScore=97 
+		
+		
+
+		System.out.println(
+				courses.stream()
+				.takeWhile(course->course.getNoOfStudents()<21000)
+				.collect(Collectors.toList())
+				);
+//		[Course [name=Spring, category=Framework, reviewScore=98, noOfStudents=20000],
+//		 Course [name=Spring Boot, category=Framework, reviewScore=95, noOfStudents=18000]]
+
+		System.out.println(
+				courses.stream()
+				.dropWhile(c->c.getReviewScore()>93)
+				.collect(Collectors.toList())
+				);
+//		[Course [name=FullStack, category=FullStack, reviewScore=91, noOfStudents=14000],
+//		 Course [name=AWS, category=Cloud, reviewScore=92, noOfStudents=21000],
+//		 Course [name=Azure, category=Cloud, reviewScore=99, noOfStudents=21000],
+//		 Course [name=Docker, category=Cloud, reviewScore=92, noOfStudents=20000], 
+//		 Course [name=Kubernetes, category=Cloud, reviewScore=91, noOfStudents=20000]]
+
+		
+		
+		//min,max,findfirst,findany
+		
+		Comparator<Course> category=Comparator.comparing(Course::getCategory);
+		
+		Comparator<Course> review=Comparator.comparing(Course::getReviewScore);
+		
+		Comparator<Course> name=Comparator.comparing(Course::getName);	
+		
+		System.out.println(
+				courses.stream().sorted(category).collect(Collectors.toList())
+				);
+	
+		System.out.println(
+				courses.stream().sorted(review).collect(Collectors.toList())
+				);
+		System.out.println(
+				courses.stream().sorted(name).collect(Collectors.toList())
+				);
+		
+		System.out.println(
+				courses.stream().max(review)
+				);
+		
+		System.out.println(
+				courses.stream().min(review)
+				.orElse(new Course("Spring", "Framework", 98, 20000))
+				);
+		
+		System.out.println(
+				courses.stream()
+				.filter(ratingGreaterThenNintyFivePredicate)
+				.findFirst()
+				.orElse(new Course("Kubernetes", "Cloud", 91, 20000))
+				);
+		System.out.println( 
+				courses.stream()
+				.filter(ratingGreaterThenNintyFivePredicate)
+				.findAny()
+				);
+		
+		//sum,average,count
+		System.out.println( 
+				courses.stream()
+				.filter(ratingLessThenNintyFivePredicate)
+				.mapToInt(Course::getNoOfStudents)
+				.sum()
+				);
+		
+		System.out.println( 
+				courses.stream()
+				.filter(ratingLessThenNintyFivePredicate)
+				.mapToInt(Course::getNoOfStudents)
+				.average()
+				);
+		
+		
+		System.out.println( 
+				courses.stream()
+				.filter(ratingLessThenNintyFivePredicate)
+				.mapToInt(Course::getNoOfStudents)
+				.count()
+				);
+		
+		// grouping this 
+		System.out.println( 
+				courses.stream()
+			.collect(Collectors.groupingBy(Course::getCategory))
+				);
+		
+		System.out.println( 
+				courses.stream()
+			.collect(Collectors.groupingBy(Course::getCategory,Collectors.counting()))
+				);
+		
+		System.out.println( 
+				courses.stream()
+			.collect(Collectors.groupingBy(Course::getCategory,
+					Collectors.maxBy(Comparator.comparing(Course::getReviewScore))))
+				);
+		System.out.println( 
+				courses.stream()
+			.collect(Collectors.groupingBy(Course::getCategory,
+					Collectors.mapping(Course::getName, Collectors.toList())))
+				);
 	}
 	
 }

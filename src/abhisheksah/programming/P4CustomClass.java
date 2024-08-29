@@ -125,6 +125,16 @@ public class P4CustomClass {
 				employees.stream()
 				.sorted(comparewithSalaryAndExperiencedecending)
 				.collect(Collectors.toList()));
+		
+		System.out.println(
+				employees.stream().sorted(comparewithSalaryAndExperiencedecending)
+				.limit(2).collect(Collectors.toList())
+				);
+		
+		System.out.println(
+				employees.stream().sorted(comparewithSalaryAndExperiencedecending)
+				.limit(2).collect(Collectors.toList())
+				);
 	
 	}
 
