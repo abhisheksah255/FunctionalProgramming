@@ -2,8 +2,6 @@ package abhisheksah.programming;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -95,23 +93,38 @@ public class P4CustomClass {
 		
 		//Ascending order
 		
-		Comparator<Employee> comparewithSalary= Comparator.comparingInt(Employee::getSalary);
-		System.out.println(employees.stream().sorted(comparewithSalary).collect(Collectors.toList()));
+		Comparator<Employee> comparewithSalary=
+				Comparator.comparingInt(Employee::getSalary);
+		System.out.println(employees.stream()
+				.sorted(comparewithSalary)
+				.collect(Collectors.toList()));
+
+//[Employee [name=Rahul, domain=PHP, employeeId=6, salary=32045, experience=2], Employee [name=Aman, domain=UX, employeeId=3, salary=32045, experience=2], Employee [name=Mukesh, domain=Fullstack, employeeId=7, salary=34880, experience=4], Employee [name=Aniket, domain=Frontend, employeeId=5, salary=35001, experience=5], Employee [name=Puneet, domain=Backend, employeeId=12, salary=56990, experience=5], Employee [name=Vishwa, domain=Frontend, employeeId=54, salary=65382, experience=7], Employee [name=Mohit, domain=UI, employeeId=1, salary=67090, experience=3], Employee [name=Abhishek, domain=Backend, employeeId=2, salary=75439, experience=3], Employee [name=Prasant, domain=Android, employeeId=76, salary=89600, experience=9], Employee [name=Ablish, domain=Android, employeeId=23, salary=98003, experience=9]]
+
 		
 		Comparator<Employee> comparewithSalaryAndExperience= 
-				Comparator.comparing(Employee::getSalary)
+				Comparator.
+				comparing(Employee::getSalary)
 				.thenComparing(Employee::getEmployeeId);
+//				comparing(Employee::getEmployeeId).thenComparing(Employee::getSalary);
 		System.out.println(employees.stream().sorted(comparewithSalaryAndExperience).collect(Collectors.toList()));
-	//[name=Rahul, domain=PHP, employeeId=6, salary=32045, experience=2], Employee [name=Aman, domain=UX, employeeId=10, salary=34237, experience=2], Employee [name=Mukesh, domain=Fullstack, employeeId=7, salary=34880, experience=4], Employee [name=Aniket, domain=Frontend, employeeId=5, salary=35001, experience=5], Employee [name=Puneet, domain=Backend, employeeId=12, salary=56990, experience=5], Employee [name=Vishwa, domain=Frontend, employeeId=54, salary=65382, experience=7], Employee [name=Mohit, domain=UI, employeeId=1, salary=67090, experience=3], Employee [name=Abhishek, domain=Backend, employeeId=2, salary=75439, experience=3], Employee [name=Prasant, domain=Android, employeeId=76, salary=89600, experience=9], Employee [name=Ablish, domain=Android, employeeId=23, salary=98003, experience=9]]
+//		[Employee [name=Aman, domain=UX, employeeId=3, salary=32045, experience=2], Employee [name=Rahul, domain=PHP, employeeId=6, salary=32045, experience=2], Employee [name=Mukesh, domain=Fullstack, employeeId=7, salary=34880, experience=4], Employee [name=Aniket, domain=Frontend, employeeId=5, salary=35001, experience=5], Employee [name=Puneet, domain=Backend, employeeId=12, salary=56990, experience=5], Employee [name=Vishwa, domain=Frontend, employeeId=54, salary=65382, experience=7], Employee [name=Mohit, domain=UI, employeeId=1, salary=67090, experience=3], Employee [name=Abhishek, domain=Backend, employeeId=2, salary=75439, experience=3], Employee [name=Prasant, domain=Android, employeeId=76, salary=89600, experience=9], Employee [name=Ablish, domain=Android, employeeId=23, salary=98003, experience=9]]
 
 		//Descending Order
-		Comparator<Employee> comparewithSalaryDecending= Comparator.comparing(Employee::getSalary).reversed();
-		System.out.println(employees.stream().sorted(comparewithSalaryDecending).collect(Collectors.toList()));
+		Comparator<Employee> comparewithSalaryDecending= 
+				Comparator.comparing(Employee::getSalary).reversed();
+		System.out.println(
+				employees.stream()
+				.sorted(comparewithSalaryDecending)
+				.collect(Collectors.toList()));
 		
 		Comparator<Employee> comparewithSalaryAndExperiencedecending= 
 				Comparator.comparing(Employee::getSalary)
 				.thenComparing(Employee::getEmployeeId).reversed();
-		System.out.println(employees.stream().sorted(comparewithSalaryAndExperiencedecending).collect(Collectors.toList()));
+		System.out.println(
+				employees.stream()
+				.sorted(comparewithSalaryAndExperiencedecending)
+				.collect(Collectors.toList()));
 	
 	}
 
